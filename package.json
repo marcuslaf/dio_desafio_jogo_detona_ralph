@@ -1,0 +1,58 @@
+{
+  "name": "detona-ralph",
+  "version": "2.0.0",
+  "description": "Jogo Detona Ralph - Um jogo de reação e velocidade inspirado no personagem Wreck-It Ralph",
+  "keywords": [
+    "jogo",
+    "game",
+    "javascript",
+    "html5",
+    "css3",
+    "vanilla-js",
+    "browser-game",
+    "arcade",
+    "wreck-it-ralph",
+    "detona-ralph"
+  ],
+  "author": {
+    "name": "Marcus Laf",
+    "url": "https://github.com/marcuslaf"
+  },
+  "license": "MIT",
+  "homepage": "https://marcuslaf.github.io/dio_desafio_jogo_detona_ralph/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcuslaf/dio_desafio_jogo_detona_ralph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcuslaf/dio_desafio_jogo_detona_ralph/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000",
+    "build": "echo 'Static project - no build needed'"
+  },
+  "features": [
+    "Sistema de pontuação com ranking local (localStorage)",
+    "3 vidas com tempo de 60 segundos cada",
+    "Tela inicial com instruções",
+    "Tela de tempo esgotado com opção de continuar",
+    "Tela de game over com ranking TOP 5",
+    "Animações CSS e efeitos visuais",
+    "Design responsivo para dispositivos móveis",
+    "Acessibilidade (ARIA labels, navegação por teclado)",
+    "Suporte a prefers-reduced-motion",
+    "Cache de áudio para performance",
+    "Tratamento de erros em operações I/O"
+  ],
+  "technologies": [
+    "HTML5 (Semantic HTML)",
+    "CSS3 (Grid, Custom Properties, Animations)",
+    "JavaScript (ES6+, localStorage API)"
+  ],
+  "category": "game",
+  "theme": "arcade"
+}
