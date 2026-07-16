@@ -1,0 +1,5 @@
+{
+  "buildCommand": "echo 'Static project - no build needed'",
+  "outputDirectory": ".",
+  "framework": null
+}
