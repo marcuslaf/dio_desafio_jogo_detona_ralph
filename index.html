@@ -48,14 +48,74 @@
                 </div>
             </main>
 
-            <div id="start-screen" class="start-screen" role="dialog" aria-labelledby="start-title">
-                <div class="start-content">
-                    <h1 id="start-title" class="start-title">DETONA RALPH</h1>
-                    <p class="start-instructions">Clique nos inimigos o mais rápido possível!</p>
-                    <p class="start-rules">Você tem 60 segundos e 3 vidas. Boa sorte!</p>
-                    <button id="start-button" class="start-button" aria-label="Iniciar jogo">
+            <!-- Tela Inicial -->
+            <div id="start-screen" class="overlay-screen" role="dialog" aria-labelledby="start-title">
+                <div class="overlay-content">
+                    <h1 id="start-title" class="overlay-title">DETONA RALPH</h1>
+                    <p class="overlay-instructions">Clique nos inimigos o mais rápido possível!</p>
+                    <p class="overlay-rules">Você tem 60 segundos e 3 vidas. Boa sorte!</p>
+                    <button id="start-button" class="overlay-button primary-button" aria-label="Iniciar jogo">
                         JOGAR
                     </button>
+                </div>
+            </div>
+
+            <!-- Tela Tempo Esgotado -->
+            <div id="timeout-screen" class="overlay-screen hidden" role="dialog" aria-labelledby="timeout-title">
+                <div class="overlay-content">
+                    <h2 id="timeout-title" class="overlay-title timeout-title">TEMPO ESGOTADO!</h2>
+                    <div class="timeout-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Pontos da Rodada</span>
+                            <span id="timeout-score" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Vidas Restantes</span>
+                            <span id="timeout-lives" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <p class="overlay-message">Preparar... Pronto... TENTAR NOVAMENTE!</p>
+                    <div class="overlay-buttons">
+                        <button id="continue-button" class="overlay-button primary-button" aria-label="Continuar jogando">
+                            CONTINUAR
+                        </button>
+                        <button id="menu-button-timeout" class="overlay-button secondary-button" aria-label="Voltar ao menu">
+                            MENU
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tela Game Over -->
+            <div id="gameover-screen" class="overlay-screen hidden" role="dialog" aria-labelledby="gameover-title">
+                <div class="overlay-content">
+                    <h2 id="gameover-title" class="overlay-title gameover-title">GAME OVER</h2>
+                    <div class="gameover-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Sua Pontuação</span>
+                            <span id="final-score" class="stat-value highlight">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Melhor Score</span>
+                            <span id="best-score" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="ranking-section">
+                        <h3 class="ranking-title">TOP 5 JOGADORES</h3>
+                        <ol id="ranking-list" class="ranking-list"></ol>
+                    </div>
+                    <div class="name-input-section">
+                        <label for="player-name" class="name-label">Digite seu nome para salvar:</label>
+                        <input type="text" id="player-name" class="name-input" maxlength="20" placeholder="Seu nome" />
+                    </div>
+                    <div class="overlay-buttons">
+                        <button id="save-and-restart" class="overlay-button primary-button" aria-label="Salvar e jogar novamente">
+                            SALVAR E JOGAR
+                        </button>
+                        <button id="menu-button-gameover" class="overlay-button secondary-button" aria-label="Voltar ao menu">
+                            MENU
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
