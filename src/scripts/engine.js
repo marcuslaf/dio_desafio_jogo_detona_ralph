@@ -16,6 +16,18 @@ const state = {
         lives: null,
         startScreen: null,
         startButton: null,
+        timeoutScreen: null,
+        timeoutScore: null,
+        timeoutLives: null,
+        continueButton: null,
+        menuButtonTimeout: null,
+        gameoverScreen: null,
+        finalScore: null,
+        bestScore: null,
+        rankingList: null,
+        playerNameInput: null,
+        saveAndRestartButton: null,
+        menuButtonGameover: null,
     },
     values: {
         gameVelocity: GameConfig.GAME_VELOCITY,
@@ -26,6 +38,7 @@ const state = {
         bestScore: 0,
         canClick: true,
         isGameRunning: false,
+        roundScore: 0,
     },
     actions: {
         timerId: null,
@@ -63,8 +76,23 @@ function cacheDOMElements() {
     state.view.timeLeft = document.querySelector('#time-left');
     state.view.score = document.querySelector('#score');
     state.view.lives = document.querySelector('#lives');
+
     state.view.startScreen = document.querySelector('#start-screen');
     state.view.startButton = document.querySelector('#start-button');
+
+    state.view.timeoutScreen = document.querySelector('#timeout-screen');
+    state.view.timeoutScore = document.querySelector('#timeout-score');
+    state.view.timeoutLives = document.querySelector('#timeout-lives');
+    state.view.continueButton = document.querySelector('#continue-button');
+    state.view.menuButtonTimeout = document.querySelector('#menu-button-timeout');
+
+    state.view.gameoverScreen = document.querySelector('#gameover-screen');
+    state.view.finalScore = document.querySelector('#final-score');
+    state.view.bestScore = document.querySelector('#best-score');
+    state.view.rankingList = document.querySelector('#ranking-list');
+    state.view.playerNameInput = document.querySelector('#player-name');
+    state.view.saveAndRestartButton = document.querySelector('#save-and-restart');
+    state.view.menuButtonGameover = document.querySelector('#menu-button-gameover');
 }
 
 function updateDisplay() {
@@ -94,6 +122,9 @@ function countDown() {
 }
 
 function handleTimeOut() {
+    clearAllIntervals();
+    state.values.isGameRunning = false;
+
     state.values.lives--;
     state.view.lives.textContent = state.values.lives;
 
@@ -102,16 +133,33 @@ function handleTimeOut() {
     }
 
     if (state.values.lives <= 0) {
-        gameOver();
+        showGameOverScreen();
     } else {
-        resetRound();
+        showTimeoutScreen();
     }
+}
+
+function showTimeoutScreen() {
+    state.view.timeoutScore.textContent = state.values.result;
+    state.view.timeoutLives.textContent = state.values.lives;
+    state.view.timeoutScreen.classList.remove('hidden');
+    state.view.continueButton.focus();
+}
+
+function hideTimeoutScreen() {
+    state.view.timeoutScreen.classList.add('hidden');
+}
+
+function continueGame() {
+    hideTimeoutScreen();
+    resetRound();
 }
 
 function resetRound() {
     state.values.currentTime = GameConfig.INITIAL_TIME;
     state.values.result = 0;
     state.values.canClick = true;
+    state.values.isGameRunning = true;
 
     updateDisplay();
     clearAllIntervals();
@@ -130,46 +178,48 @@ function resetGame() {
     resetRound();
 }
 
-function gameOver() {
-    state.values.isGameRunning = false;
-    clearAllIntervals();
-
-    saveScore(state.values.bestScore);
+function showGameOverScreen() {
+    state.view.finalScore.textContent = state.values.result;
+    state.view.bestScore.textContent = state.values.bestScore;
 
     const ranking = getTopScores();
-    let message = `Game Over!\nSeu melhor score: ${state.values.bestScore}\n\nTop 5 Jogadores:\n`;
+    renderRanking(ranking);
+
+    state.view.playerNameInput.value = '';
+    state.view.gameoverScreen.classList.remove('hidden');
+    state.view.playerNameInput.focus();
+}
+
+function hideGameOverScreen() {
+    state.view.gameoverScreen.classList.add('hidden');
+}
+
+function renderRanking(ranking) {
+    state.view.rankingList.innerHTML = '';
 
     if (ranking.length === 0) {
-        message += 'Nenhuma pontuação salva ainda.\n';
-    } else {
-        ranking.forEach((score, index) => {
-            message += `${index + 1}. ${score.playerName}: ${score.score} pontos\n`;
-        });
+        const li = document.createElement('li');
+        li.textContent = 'Nenhuma pontuação salva ainda.';
+        li.style.color = '#666';
+        state.view.rankingList.appendChild(li);
+        return;
     }
 
-    alert(message);
-
-    if (confirm('Deseja jogar novamente?')) {
-        resetGame();
-    } else {
-        showStartScreen();
-    }
-}
-
-function showStartScreen() {
-    state.view.startScreen.classList.remove('hidden');
-    state.view.startButton.focus();
-}
-
-function hideStartScreen() {
-    state.view.startScreen.classList.add('hidden');
+    ranking.forEach((score, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${score.playerName}: ${score.score} pontos`;
+        state.view.rankingList.appendChild(li);
+    });
 }
 
 function saveScore(score) {
-    const playerName = prompt('Digite seu nome para salvar a pontuação:');
-    if (!playerName || !playerName.trim()) return;
+    const playerName = state.view.playerNameInput.value.trim();
+    if (!playerName) {
+        state.view.playerNameInput.focus();
+        return false;
+    }
 
-    const sanitizedName = playerName.trim().substring(0, 20);
+    const sanitizedName = playerName.substring(0, 20);
 
     let scores = getTopScores();
     const existingScoreIndex = scores.findIndex(
@@ -197,6 +247,8 @@ function saveScore(score) {
     } catch (error) {
         console.warn('Erro ao salvar pontuação:', error);
     }
+
+    return true;
 }
 
 function getTopScores() {
@@ -224,6 +276,8 @@ function randomSquare() {
 }
 
 function handleSquareClick(event) {
+    if (!state.values.isGameRunning) return;
+
     const clickedSquare = event.currentTarget;
 
     if (clickedSquare.id === state.values.hitPosition && state.values.canClick) {
@@ -260,9 +314,36 @@ function removeListenerHitBox() {
     });
 }
 
+function showStartScreen() {
+    state.view.startScreen.classList.remove('hidden');
+    state.view.startButton.focus();
+}
+
+function hideStartScreen() {
+    state.view.startScreen.classList.add('hidden');
+}
+
 function startGame() {
     hideStartScreen();
+    hideGameOverScreen();
+    hideTimeoutScreen();
     resetGame();
+}
+
+function goToMenu() {
+    clearAllIntervals();
+    state.values.isGameRunning = false;
+    hideTimeoutScreen();
+    hideGameOverScreen();
+    showStartScreen();
+}
+
+function handleSaveAndRestart() {
+    const saved = saveScore(state.values.result);
+    if (saved) {
+        hideGameOverScreen();
+        resetGame();
+    }
 }
 
 function initEventListeners() {
@@ -271,6 +352,45 @@ function initEventListeners() {
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             startGame();
+        }
+    });
+
+    state.view.continueButton.addEventListener('click', continueGame);
+    state.view.continueButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            continueGame();
+        }
+    });
+
+    state.view.menuButtonTimeout.addEventListener('click', goToMenu);
+    state.view.menuButtonTimeout.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            goToMenu();
+        }
+    });
+
+    state.view.saveAndRestartButton.addEventListener('click', handleSaveAndRestart);
+    state.view.saveAndRestartButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleSaveAndRestart();
+        }
+    });
+
+    state.view.menuButtonGameover.addEventListener('click', goToMenu);
+    state.view.menuButtonGameover.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            goToMenu();
+        }
+    });
+
+    state.view.playerNameInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSaveAndRestart();
         }
     });
 
