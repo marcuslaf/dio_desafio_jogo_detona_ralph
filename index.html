@@ -4,7 +4,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Jogo Detona Ralph - Um jogo de reação e velocidade">
+        <meta name="theme-color" content="#000000">
+        <meta property="og:title" content="Detona Ralph - Jogo de Reação">
+        <meta property="og:description" content="Jogo de reação e velocidade inspirado em Wreck-It Ralph">
+        <meta property="og:image" content="./src/images/player.png">
+        <meta property="og:type" content="website">
         <title>Detona Ralph</title>
+        <link rel="icon" type="image/jpeg" href="./src/images/favicon.jpg">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -22,10 +28,17 @@
                     <h2 class="menu-title">Your Score</h2>
                     <h2 id="score" class="menu-value" aria-live="polite">0</h2>
                 </div>
+                <div class="menu-combo">
+                    <h2 class="menu-title">Combo</h2>
+                    <h2 id="combo-display" class="menu-value combo-value" aria-live="polite"></h2>
+                </div>
                 <div class="menu-lives">
-                    <img src="./src/images/player.png" alt="Ícone do jogador" height="60px" />
+                    <img src="./src/images/player.png" alt="Ícone do jogador" height="60px" loading="lazy" decoding="async" />
                     <div class="lives-container">Lives: <span id="lives" aria-live="polite">3</span></div>
                 </div>
+                <button id="pause-button" class="pause-button" aria-label="Pausar jogo" title="Pausar (Escape)">
+                    ⏸
+                </button>
             </header>
 
             <main class="game-area">
@@ -102,17 +115,34 @@
                     </div>
                     <div class="ranking-section">
                         <h3 class="ranking-title">TOP 5 JOGADORES</h3>
-                        <ol id="ranking-list" class="ranking-list"></ol>
+                        <ol id="ranking-list" class="ranking-list" aria-live="polite" role="status"></ol>
                     </div>
                     <div class="name-input-section">
                         <label for="player-name" class="name-label">Digite seu nome para salvar:</label>
-                        <input type="text" id="player-name" class="name-input" maxlength="20" placeholder="Seu nome" />
+                        <input type="text" id="player-name" class="name-input" maxlength="20" placeholder="Seu nome" aria-describedby="name-help" />
+                        <span id="name-help" class="sr-only">Máximo de 20 caracteres</span>
                     </div>
                     <div class="overlay-buttons">
                         <button id="save-and-restart" class="overlay-button primary-button" aria-label="Salvar e jogar novamente">
                             SALVAR E JOGAR
                         </button>
                         <button id="menu-button-gameover" class="overlay-button secondary-button" aria-label="Voltar ao menu">
+                            MENU
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tela Pausa -->
+            <div id="pause-screen" class="overlay-screen hidden" role="dialog" aria-labelledby="pause-title">
+                <div class="overlay-content">
+                    <h2 id="pause-title" class="overlay-title pause-title">JOGO PAUSADO</h2>
+                    <p class="overlay-message">Pressione Escape ou clique em Continuar para voltar ao jogo.</p>
+                    <div class="overlay-buttons">
+                        <button id="resume-button" class="overlay-button primary-button" aria-label="Continuar jogando">
+                            CONTINUAR
+                        </button>
+                        <button id="menu-button-pause" class="overlay-button secondary-button" aria-label="Voltar ao menu">
                             MENU
                         </button>
                     </div>
