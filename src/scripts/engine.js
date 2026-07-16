@@ -38,7 +38,6 @@ const state = {
         bestScore: 0,
         canClick: true,
         isGameRunning: false,
-        roundScore: 0,
     },
     actions: {
         timerId: null,
@@ -112,6 +111,13 @@ function clearAllIntervals() {
     }
 }
 
+function clearEnemyFromSquares() {
+    state.view.squares.forEach((square) => {
+        square.classList.remove('enemy');
+        square.removeAttribute('aria-label');
+    });
+}
+
 function countDown() {
     state.values.currentTime--;
     state.view.timeLeft.textContent = state.values.currentTime;
@@ -126,7 +132,6 @@ function handleTimeOut() {
     state.values.isGameRunning = false;
 
     state.values.lives--;
-    state.view.lives.textContent = state.values.lives;
 
     if (state.values.result > state.values.bestScore) {
         state.values.bestScore = state.values.result;
@@ -142,6 +147,7 @@ function handleTimeOut() {
 function showTimeoutScreen() {
     state.view.timeoutScore.textContent = state.values.result;
     state.view.timeoutLives.textContent = state.values.lives;
+    clearEnemyFromSquares();
     state.view.timeoutScreen.classList.remove('hidden');
     state.view.continueButton.focus();
 }
@@ -158,9 +164,11 @@ function continueGame() {
 function resetRound() {
     state.values.currentTime = GameConfig.INITIAL_TIME;
     state.values.result = 0;
+    state.values.hitPosition = null;
     state.values.canClick = true;
     state.values.isGameRunning = true;
 
+    clearEnemyFromSquares();
     updateDisplay();
     clearAllIntervals();
 
@@ -170,11 +178,8 @@ function resetRound() {
 
 function resetGame() {
     state.values.lives = GameConfig.INITIAL_LIVES;
-    state.values.bestScore = 0;
     state.values.canClick = true;
-    state.values.isGameRunning = true;
 
-    updateDisplay();
     resetRound();
 }
 
@@ -185,6 +190,7 @@ function showGameOverScreen() {
     const ranking = getTopScores();
     renderRanking(ranking);
 
+    clearEnemyFromSquares();
     state.view.playerNameInput.value = '';
     state.view.gameoverScreen.classList.remove('hidden');
     state.view.playerNameInput.focus();
@@ -261,10 +267,7 @@ function getTopScores() {
 }
 
 function randomSquare() {
-    state.view.squares.forEach((square) => {
-        square.classList.remove('enemy');
-        square.removeAttribute('aria-label');
-    });
+    clearEnemyFromSquares();
 
     const randomNumber = Math.floor(Math.random() * 9);
     const selectedSquare = state.view.squares[randomNumber];
@@ -307,14 +310,8 @@ function addListenerHitBox() {
     });
 }
 
-function removeListenerHitBox() {
-    state.view.squares.forEach((square) => {
-        square.removeEventListener('mousedown', handleSquareClick);
-        square.removeEventListener('keydown', handleSquareKeydown);
-    });
-}
-
 function showStartScreen() {
+    clearEnemyFromSquares();
     state.view.startScreen.classList.remove('hidden');
     state.view.startButton.focus();
 }
@@ -392,6 +389,10 @@ function initEventListeners() {
             event.preventDefault();
             handleSaveAndRestart();
         }
+    });
+
+    state.view.playerNameInput.addEventListener('click', (event) => {
+        event.stopPropagation();
     });
 
     window.addEventListener('beforeunload', clearAllIntervals);
