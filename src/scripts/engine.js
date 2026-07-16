@@ -253,6 +253,7 @@ function hideTimeoutScreen() {
 
 function continueGame() {
     hideTimeoutScreen();
+    hidePauseScreen();
     resetRound();
 }
 
@@ -289,7 +290,6 @@ function resetRound() {
     state.values.isGameRunning = true;
     state.values.isPaused = false;
     state.values.roundScore = 0;
-    state.values.gameVelocity = GameConfig.INITIAL_VELOCITY;
     state.values.combo = 0;
 
     clearEnemyFromSquares();
@@ -545,6 +545,7 @@ function showPauseScreen() {
     if (!state.values.isGameRunning || state.values.isPaused) return;
 
     state.values.isPaused = true;
+    clearAllIntervals();
     clearEnemyFromSquares();
     state.view.pauseScreen.classList.remove('hidden');
     state.view.resumeButton.focus();
