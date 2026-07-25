@@ -1,178 +1,145 @@
+# Detona Ralph | Wreck-It Ralph Reaction Game
+
 <p align="center">
   <img src="src/images/player.png" alt="Player Icon" width="100">
 </p>
 
-<h1 align="center">🎮 Detona Ralph</h1>
+## 🇧🇷 Português
 
-<p align="center">
-  <strong>Jogo de reação e velocidade inspirado em Wreck-It Ralph</strong>
-</p>
+Jogo de reação e velocidade inspirado em **Wreck-It Ralph**, desenvolvido com **HTML, CSS e JavaScript puro**. Acumule pontos clicando nos inimigos que aparecem no painel, administrando tempo e vidas.
 
-<p align="center">
-  <a href="https://marcuslaf.github.io/dio_desafio_jogo_detona_ralph/">🎮 Jogar Online</a> •
-  <a href="https://github.com/marcuslaf/dio_desafio_jogo_detona_ralph">📦 GitHub</a> •
-  <a href="#funcionalidades">✨ Features</a> •
-  <a href="#tecnologias">🛠️ Tech Stack</a>
-</p>
+## 🇺🇸 English
+
+Reaction and speed game inspired by **Wreck-It Ralph**, built with **vanilla HTML, CSS, and JavaScript**. Score points by clicking enemies that appear on the panel while managing time and lives.
 
 ---
 
-## 📸 Preview
-
-<p align="center">
-  <img src="src/images/ralph.png" alt="Ralph" width="80">
-</p>
+**🔗 Jogar Online / Play Online** → [marcuslaf.github.io/dio_desafio_jogo_detona_ralph](https://marcuslaf.github.io/dio_desafio_jogo_detona_ralph/)
 
 ---
 
-## 🎯 Sobre o Projeto
+## ✨ Features | Funcionalidades
 
-Jogo desenvolvido com **HTML, CSS e JavaScript puro** como projeto desafio da DIO. O objetivo é acumular pontos clicando nos inimigos que aparecem no painel, enquanto administra o tempo e as vidas disponíveis.
-
-### 🏆 Funcionalidades
-
-| Feature | Descrição |
-|---------|-----------|
-| ⏱️ **Sistema de Tempo** | 60 segundos por rodada |
-| ❤️ **3 Vidas** | Perde vida quando o tempo acaba |
-| 🏅 **Ranking Local** | TOP 5 salvo no localStorage |
-| 🎨 **Animações** | Efeitos visuais e feedback ao clicar |
-| 📱 **Responsivo** | Funciona em mobile e desktop |
-| ♿ **Acessível** | Navegação por teclado e ARIA labels |
-| 🎭 **3 Telas** | Inicial, Tempo Esgotado e Game Over |
+| Feature | Descrição | Description |
+|---------|-----------|-------------|
+| ⏱️ **Timer** | 60 segundos por rodada | 60 seconds per round |
+| ❤️ **3 Vidas** | Perde vida quando o tempo acaba | Lose a life when time runs out |
+| 🏆 **Ranking TOP 5** | Salvos no localStorage | Top 5 saved in localStorage |
+| 🖥️ **3 Telas** | Inicial, Tempo Esgotado, Game Over | Start, Time Out, Game Over screens |
+| 🎬 **Animações** | Efeitos visuais e feedback ao clicar | Visual effects and click feedback |
+| ♿ **Acessível** | Navegação por teclado e ARIA labels | Keyboard navigation and ARIA labels |
+| 📱 **Responsivo** | Mobile e desktop | Mobile and desktop |
 
 ---
 
-## 🎮 Como Jogar
+## 🎮 How to Play | Como Jogar
 
-```
-┌─────────────────────────────────────────┐
-│  1. Clique em "JOGAR" para iniciar      │
-│  2. Clique nos inimigos (quares vermelhos) │
-│  3. Cada acerto = 1 ponto              │
-│  4. Tempo esgota = perde 1 vida        │
-│  5. 3 vidas = Game Over                │
-└─────────────────────────────────────────┘
-```
+`
+┌───────────────────────────────────────┐
+│  1. Clique em "JOGAR" para iniciar    │
+│  2. Clique nos inimigos (quadrados)    │
+│  3. Cada acerto = 1 ponto             │
+│  4. Tempo esgota = perde 1 vida       │
+│  5. 3 vidas = Game Over               │
+└───────────────────────────────────────┘
+`
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack | Pilha Tecnológica
 
-| Tecnologia | Uso |
-|------------|-----|
-| **HTML5** | Estrutura semântica |
+| Tecnologia / Technology | Uso / Purpose |
+|-------------------------|---------------|
+| **HTML5** | Estrutura semântica / Semantic structure |
 | **CSS3** | Grid, Custom Properties, Animations |
 | **JavaScript** | ES6+, localStorage API |
 
 ---
 
-## 📁 Estrutura
+## 📁 Structure | Estrutura
 
-```
+`
 dio_desafio_jogo_detona_ralph/
-├── index.html              # Página principal
-├── package.json            # Metadados do projeto
-├── README.md               # Esta documentação
-├── .gitignore              # Arquivos ignorados
+├── index.html              # Main page
+├── package.json            # Project metadata
+├── README.md               # Documentation
+├── .gitignore
 └── src/
     ├── scripts/
-    │   └── engine.js       # Lógica do jogo (400+ linhas)
+    │   └── engine.js       # Game logic (400+ lines)
     ├── styles/
-    │   ├── reset.css       # CSS Reset moderno
-    │   └── main.css        # Estilos do jogo
+    │   ├── reset.css       # Modern CSS reset
+    │   └── main.css        # Game styles
     ├── images/
-    │   ├── player.png      # Ícone do jogador
-    │   ├── ralph.png       # Sprite do inimigo
+    │   ├── player.png      # Player icon
+    │   ├── ralph.png       # Enemy sprite
     │   └── wall.png        # Background
     └── audios/
-        └── hit.m4a         # Efeito sonoro
-```
+        └── hit.m4a         # Sound effect
+`
 
 ---
 
 ## 🚀 Quick Start
 
-### Opção 1: Online (Recomendado)
-Acesse diretamente: **[🎮 Jogar Agora](https://marcuslaf.github.io/dio_desafio_jogo_detona_ralph/)**
+### Online (Recomendado / Recommended)
+**[Jogar Agora / Play Now](https://marcuslaf.github.io/dio_desafio_jogo_detona_ralph/)**
 
-### Opção 2: Local
-```bash
-# Clone
+### Local
+`ash
 git clone https://github.com/marcuslaf/dio_desafio_jogo_detona_ralph.git
-
-# Acesse
 cd dio_desafio_jogo_detona_ralph
-
-# Execute (opcional - pode abrir index.html direto)
+# Abra index.html no navegador ou / Open index.html or:
 npx serve .
-```
+`
 
 ---
 
-## 📊 Badges
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
----
-
-## 🔧 Melhorias Implementadas
+## 🧠 Improvements | Melhorias Implementadas
 
 ### Performance
-- ✅ Cache de áudio para evitar múltiplas instâncias
-- ✅ Limpeza adequada de intervals (memory leak prevention)
-- ✅ DOM caching para melhor performance
+- Áudio cache (evita múltiplas instâncias) / Audio cache (avoids multiple instances)
+- Limpeza adequada de intervals / Proper interval cleanup
+- DOM caching para performance / DOM caching
 
-### Acessibilidade
-- ✅ Roles ARIA em todos os elementos interativos
-- ✅ Navegação completa por teclado (Tab + Enter/Space)
-- ✅ Labels descritivos para leitores de tela
-- ✅ Suporte a `prefers-reduced-motion`
+### Acessibilidade / Accessibility
+- ARIA roles em elementos interativos / ARIA roles on interactive elements
+- Navegação completa por teclado (Tab + Enter/Space)
+- Labels descritivos para leitores de tela / Descriptive screen reader labels
+- Suporte prefers-reduced-motion
 
 ### UX
-- ✅ Tela inicial com instruções
-- ✅ Tela de tempo esgotado com opção de continuar
-- ✅ Tela de game over com ranking e input de nome
-- ✅ Animações de feedback (pulse, shake, bounce)
+- Tela inicial com instruções / Start screen with instructions
+- Tela de tempo esgotado / Time out screen
+- Tela de game over com ranking / Game over screen with ranking
+- Animações de feedback / Feedback animations
 
-### Código
-- ✅ `GameConfig` com constantes (sem valores mágicos)
-- ✅ `Object.freeze` para configurações imutáveis
-- ✅ Tratamento de erros em operações I/O
-- ✅ Funções puras e responsáveis
+### Código / Code
+- GameConfig com constantes (sem valores mágicos)
+- Object.freeze para configurações imutáveis
+- Tratamento de erros em operações I/O
+- Funções puras e responsabilidades únicas / Pure functions, single responsibilities
 
 ---
 
-## 📝 Changelog
+## 📋 Changelog
 
 ### v2.0.0 (2026)
-- ✨ Adicionada tela de tempo esotado
-- ✨ Adicionada tela de game over com ranking
-- ✨ Sistema de vidas com continuar
-- 🐛 Corrigido bestScore resetando entre jogos
-- 🎨 Novas animações e efeitos visuais
+- Tela de tempo esgotado / Time out screen
+- Tela de game over com ranking / Game over with ranking
+- Sistema de vidas com continuar / Life system with continue
+- Correção bestScore entre jogos / Fixed bestScore across games
+- Novas animações / New animations
 
 ### v1.0.0
-- 🎮 Versão inicial do jogo
+- Versão inicial / Initial release
 
 ---
 
-## 👨‍💻 Autor
+## 📬 Contact | Contato
 
-**Marcus Laf**
-- GitHub: [@marcuslaf](https://github.com/marcuslaf)
+**Marcus Lafaiete** — [GitHub](https://github.com/marcuslaf)
 
----
+## License
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-<p align="center">
-  Feito com ❤️ durante o Bootcamp DIO
-</p>
+MIT
