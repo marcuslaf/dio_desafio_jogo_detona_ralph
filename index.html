@@ -69,7 +69,23 @@
                 <div class="overlay-content">
                     <h1 id="start-title" class="overlay-title">DETONA RALPH</h1>
                     <p class="overlay-instructions">Clique nos inimigos o mais rápido possível!</p>
-                    <p class="overlay-rules">Você tem 60 segundos e 3 vidas. Boa sorte!</p>
+                    <p class="overlay-rules">Escolha a dificuldade e clique em JOGAR</p>
+
+                    <div class="difficulty-selector" role="radiogroup" aria-label="Seleção de dificuldade">
+                        <button class="difficulty-btn" data-difficulty="easy" role="radio" aria-checked="false" tabindex="0">
+                            <span class="diff-label">FÁCIL</span>
+                            <span class="diff-desc">90s · 5 vidas</span>
+                        </button>
+                        <button class="difficulty-btn selected" data-difficulty="medium" role="radio" aria-checked="true" tabindex="-1">
+                            <span class="diff-label">MÉDIO</span>
+                            <span class="diff-desc">60s · 3 vidas</span>
+                        </button>
+                        <button class="difficulty-btn" data-difficulty="hard" role="radio" aria-checked="false" tabindex="-1">
+                            <span class="diff-label">DIFÍCIL</span>
+                            <span class="diff-desc">45s · 2 vidas</span>
+                        </button>
+                    </div>
+
                     <button id="start-button" class="overlay-button primary-button" aria-label="Iniciar jogo">
                         JOGAR
                     </button>

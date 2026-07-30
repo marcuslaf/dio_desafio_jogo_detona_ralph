@@ -1,4 +1,4 @@
-import { GameConfig, state, resetValues, resetRoundValues, isGameActive } from './state.js';
+import { GameConfig, state, resetValues, resetRoundValues, isGameActive, getDifficultyPreset } from './state.js';
 import { initAudio, playSound } from './audio.js';
 import { getTopScores, saveScore } from './storage.js';
 import {
@@ -9,20 +9,22 @@ import {
     showGameOverScreen, hideGameOverScreen,
     showPauseScreen, hidePauseScreen,
     damageFlash, spawnParticles,
+    setupDifficultySelection,
 } from './ui.js';
 
 /* ─── Dificuldade ─── */
 
 function calculateEnemyCount() {
     // Sempre apenas 1 Ralph por vez — essência do jogo é encontrar o único inimigo
-    return GameConfig.ENEMY_COUNT_EASY;
+    return GameConfig.ENEMY_COUNT;
 }
 
 function updateDifficulty() {
-    const level = Math.floor(state.values.result / GameConfig.VELOCITY_DECREASE_INTERVAL);
+    const preset = getDifficultyPreset();
+    const level = Math.floor(state.values.result / 5);
     const newVelocity = Math.max(
-        GameConfig.MIN_VELOCITY,
-        GameConfig.INITIAL_VELOCITY - (level * GameConfig.VELOCITY_DECREASE)
+        preset.minVelocity,
+        preset.initialVelocity - (level * preset.velocityDecrease)
     );
 
     if (newVelocity !== state.values.gameVelocity) {
@@ -210,7 +212,6 @@ function resetRound() {
 
 function resetGame() {
     resetValues();
-    state.values.lives = GameConfig.INITIAL_LIVES;
     state.values.result = 0;
     state.values.bestScore = Math.max(state.values.bestScore, 0);
 
@@ -333,6 +334,7 @@ function initEventListeners() {
 export function initialize() {
     cacheDOMElements();
     initAudio();
+    setupDifficultySelection();
     addListenerHitBox();
     initEventListeners();
     showStartScreen();

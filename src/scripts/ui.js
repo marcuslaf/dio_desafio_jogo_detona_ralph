@@ -1,4 +1,4 @@
-import { GameConfig, state } from './state.js';
+import { GameConfig, state, setDifficulty } from './state.js';
 import { getTopScores, getBestScore } from './storage.js';
 
 export function cacheDOMElements() {
@@ -30,6 +30,8 @@ export function cacheDOMElements() {
     state.view.resumeButton = document.querySelector('#resume-button');
     state.view.menuButtonPause = document.querySelector('#menu-button-pause');
     state.view.pauseButton = document.querySelector('#pause-button');
+
+    state.view.difficultyButtons = document.querySelectorAll('.difficulty-btn');
 
     state.originalLabels = [];
     state.view.squares.forEach((square) => {
@@ -187,6 +189,39 @@ export function spawnParticles(square) {
 
 function removeParticles(square) {
     square.querySelectorAll('.particle').forEach(p => p.remove());
+}
+
+export function setupDifficultySelection() {
+    const buttons = state.view.difficultyButtons;
+    if (!buttons) return;
+
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', () => selectDifficulty(btn));
+        btn.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                selectDifficulty(btn);
+            }
+        });
+    });
+}
+
+function selectDifficulty(selectedBtn) {
+    const buttons = state.view.difficultyButtons;
+    const level = selectedBtn.dataset.difficulty;
+
+    buttons.forEach((btn) => {
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-checked', 'false');
+        btn.setAttribute('tabindex', '-1');
+    });
+
+    selectedBtn.classList.add('selected');
+    selectedBtn.setAttribute('aria-checked', 'true');
+    selectedBtn.setAttribute('tabindex', '0');
+    selectedBtn.focus();
+
+    setDifficulty(level);
 }
 
 export function clearAllIntervals() {

@@ -1,11 +1,24 @@
 import { GameConfig, state } from './state.js';
 
+/*
+ * Sistema de áudio do jogo.
+ * 
+ * NOTA: Atualmente todos os sons usam o mesmo arquivo (hit.m4a) como fallback.
+ * Para adicionar sons distintos, substitua os caminhos abaixo por arquivos de áudio reais:
+ * 
+ *   hit: './src/audios/hit-seu-arquivo.mp3'
+ *   combo: './src/audios/combo-seu-arquivo.mp3'
+ *   etc.
+ * 
+ * Formatos suportados: mp3, m4a, wav, ogg
+ */
+
 const AUDIO_FILES = {
-    hit: './src/audios/hit-8bit.wav',
-    combo: './src/audios/combo.wav',
-    gameOver: './src/audios/game-over.wav',
-    timeout: './src/audios/time-up.wav',
-    buttonClick: './src/audios/ui-click.wav',
+    hit: './src/audios/hit.m4a',
+    combo: './src/audios/hit.m4a',
+    gameOver: './src/audios/hit.m4a',
+    timeout: './src/audios/hit.m4a',
+    buttonClick: './src/audios/hit.m4a',
 };
 
 const VOLUME_MULTIPLIER = {
